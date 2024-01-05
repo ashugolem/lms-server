@@ -12,6 +12,8 @@ connectToMongo();
 // Enable CORS
 app.use(cors());
 
+// Serving static files 
+app.use('/upload', express.static(__dirname + '/upload'))
 // Body Parser
 app.use(bodyParser.json());
 
@@ -23,6 +25,7 @@ app.use('/request', require('./Routes/request'));
 app.use('/alert', require('./Routes/alert'));
 app.use('/transaction', require('./Routes/transaction'));
 app.use('/student',require('./Routes/student'))
+app.use('/teacher',require('./Routes/teacher'))
 app.use('/activation-request',require('./Routes/activation'))
 
 app.listen(port, () => {

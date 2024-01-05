@@ -1,6 +1,18 @@
 const Book = require('../../model/bookModel')
 
 const createBook = async (req, res) => {
+    // Code for aggregation
+    // const Book = require('./model/bookModel')
+    const agg = [
+        {
+            $count: 'Books'
+        }
+    ];
+    const result = await Book.aggregate(agg);
+
+    // The 'result' variable now contains the aggregated data
+    console.log(result[0].Books);
+
     try {
         const { title, author, isbn, selfNo, total, subject, stock, price, publishedOn } = req.body // Destructuring
         const book = await Book.create({
@@ -13,7 +25,8 @@ const createBook = async (req, res) => {
             stock: stock,
             price: price,
             selfNo: selfNo,
-            publishedOn: publishedOn
+            publishedOn: publishedOn,
+            code: result[0].Books+1
         })
 
         res.json({ success: true, book }).status(200)

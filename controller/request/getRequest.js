@@ -17,6 +17,7 @@ const getRequest = async (req, res) => {
                         return {
                             ...request.toObject(),
                             userName: user ? user.name : null,
+                            profile: user.profile ? user.profile : null,
                             bookName: book ? book.title : null,
                             bookCode: book ? book.code : null,
                             studentAdmNo: student ? student.admissionNo : null,

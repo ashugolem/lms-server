@@ -15,10 +15,11 @@ const deleteBook = require('../controller/book/deleteBook')
 
 // Middleware for body validation
 const {validation_array, handleValidationErrors} = require('../middleware/Validation/Book/bookValidation')
+const userValidation = require('../middleware/userValidation')
 
 
 // Routes
-router.post('/', validation_array, handleValidationErrors, createBook)
+router.post('/',userValidation , validation_array, handleValidationErrors, createBook)
 router.get('/', getAllBook);
 router.put('/:id', updateBook)
 router.delete('/:id', deleteBook)

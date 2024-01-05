@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const multer = require('multer')
 
 // Middleware : Token verification
 const tokenValidator = require('../middleware/Validation/User/tokenValidator')
@@ -12,6 +13,10 @@ const getUser = require('../controller/user/getUser')                       // T
 const getAllUser = require('../controller/user/getAllUser')                 // To check if user exists or not
 const getUserDetails = require('../controller/user/getUserDetails')         // To get the arrary of all of the users
 const login = require('../controller/user/login')                           // To check if user exists or not
+const {uploadAvatar, upload} = require('../controller/user/uploadAvatar')
+// const upload = require('../controller/user/uploadAvatar')
+
+
 
 
 // Middleware : Body Validation 
@@ -24,6 +29,7 @@ router.get('/get-user/:role', getByRole)
 router.put('/:id',  updateUser)
 router.get('/:id', getUserDetails)
 router.get('/', getAllUser)
+router.post('/upload-avatar/:id',upload.single('avatar'), uploadAvatar)
 
 
 
