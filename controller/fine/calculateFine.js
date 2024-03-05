@@ -63,7 +63,7 @@ const calculateFine = async (req, res) => {
             const student = await Students.findOne({ user: transaction[0].user })
             await Students.updateOne({ _id: student._id }, { $set: { fine: fineList[a++] } })
         } catch (error) {
-            console.log(error)
+            console.log({error: "Error",  ErrorMessage: error.message})
         }
     })
     res.status(200).json({ success: true });
