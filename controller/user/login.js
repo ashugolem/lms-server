@@ -21,7 +21,8 @@ const createUser = async (req, res) => {
             user: {
                 id: user._id,
                 role: user.role,
-                status: user.status
+                status: user.status,
+                profile: user.profile? user.profile : null
             }
         }
         const authToken = JWT.sign(data, JWT_SECRET_KEY)

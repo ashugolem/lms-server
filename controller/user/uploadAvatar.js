@@ -2,8 +2,6 @@ const multer = require('multer')
 const User = require('../../model/userModel');
 const uploader = require('../../cloudinary/upload');
 
-let filename = ""
-
 const storage = multer.diskStorage({})
 
 const upload = multer({ storage: storage })

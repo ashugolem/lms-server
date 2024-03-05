@@ -26,6 +26,8 @@ app.use('/alert', require('./Routes/alert'));
 app.use('/transaction', require('./Routes/transaction'));
 app.use('/student',require('./Routes/student'))
 app.use('/teacher',require('./Routes/teacher'))
+app.use('/fine',require('./Routes/fine_parameters'))
+app.use('/calculate-fine',require('./Routes/calculateFine'))
 app.use('/activation-request',require('./Routes/activation'))
 
 app.listen(port, () => {
