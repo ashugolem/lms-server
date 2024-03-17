@@ -2,6 +2,8 @@ const bodyParser = require('body-parser');
 const connectToMongo = require('./dbConnect');
 const cors = require('cors');
 const express = require('express');
+const cron = require('node-cron');
+const addFineToStudentAccount = require('./controller/fine/cronJobForFine');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,6 +31,20 @@ app.use('/teacher',require('./Routes/teacher'))
 app.use('/fine',require('./Routes/fine_parameters'))
 app.use('/calculate-fine',require('./Routes/calculateFine'))
 app.use('/activation-request',require('./Routes/activation'))
+
+
+//   * * * * * *
+//   | | | | | |
+//   | | | | | day of week
+//   | | | | month
+//   | | | day of month
+//   | | hour
+//   | minute
+// second(optional)
+
+cron.schedule('0 0 * * 1-5', () => {
+    addFineToStudentAccount();
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
