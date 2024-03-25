@@ -5,7 +5,7 @@ const getRequest = require('../controller/request/getRequest')
 const createRequest = require('../controller/request/createRequest')
 const updateRequest = require('../controller/request/updateRequest')
 
-router.get('/', getRequest);
+router.get('/:end', getRequest);
 router.post('/', createRequest);
 router.put('/:id', updateRequest);
 

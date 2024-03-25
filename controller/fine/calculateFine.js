@@ -12,6 +12,7 @@ const calculateFine = async (req, res) => {
     let transactions = await Transaction.find()
     const fines = await FineParameter.find()
     latestFine = fines[fines.length - 1]
+    
     transactions.map(async (transaction) => {
         if (!transaction.isReturned) {
             try {

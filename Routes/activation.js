@@ -7,7 +7,7 @@ const createActivationRequest = require('../controller/userActivation/createActi
 const updateActivationRequest = require('../controller/userActivation/updateActivationRequest')
 
 // ActivationRequest route
-router.get('/', getAllActivationRequest)
+router.get('/:end', getAllActivationRequest)
 router.post('/', createActivationRequest)
 router.put('/:id', updateActivationRequest)
 

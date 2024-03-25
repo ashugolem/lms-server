@@ -13,8 +13,8 @@ const getRequest = async (req, res) => {
                 allRequests.map(async (request) => {
                     const user = await User.findById(request.user);
                     const book = await Book.findById(request.book);
-                    if(user.role==="Student"){
-                        const student = await Student.findOne({user: request.user});
+                    if (user.role === "Student") {
+                        const student = await Student.findOne({ user: request.user });
                         return {
                             ...request.toObject(),
                             userName: user ? user.name : null,
@@ -26,7 +26,7 @@ const getRequest = async (req, res) => {
                             selfNo: book ? book.selfNo : null
                         };
                     }
-                    const teacher = await Teacher.findOne({user: request.user});
+                    const teacher = await Teacher.findOne({ user: request.user });
                     return {
                         ...request.toObject(),
                         userName: user ? user.name : null,
@@ -34,14 +34,30 @@ const getRequest = async (req, res) => {
                         bookName: book ? book.title : null,
                         bookCode: book ? book.code : null,
                         profile: user.profile ? user.profile : null,
-                        eid: teacher? teacher.eid : null,
-                        designation: teacher? teacher.designation : null,
+                        eid: teacher ? teacher.eid : null,
+                        designation: teacher ? teacher.designation : null,
                         selfNo: book ? book.selfNo : null
                     };
 
                 }));
-
-            res.status(200).json({ allRequests: requestsWithDetails });
+            const unseenRequestsCount = requestsWithDetails.filter(request => !request.seen).length;
+            const sortedRequests = requestsWithDetails.sort((a, b) => {
+                // Custom sorting logic
+                if (a.seen === b.seen) {
+                    // If both alerts have the same 'seen' value, maintain the original order
+                    return 0;
+                } else if (a.seen === false) {
+                    // If 'seen' is false, move the alert up in the sorted order
+                    return -1;
+                } else {
+                    // If 'seen' is true, move the alert down in the sorted order
+                    return 1;
+                }
+            }).slice(0, req.params.end)
+            res.status(200).json({
+                unseenRequestsCount,
+                allRequests: sortedRequests 
+            });
         } else {
             res.status(200).json({ allRequests: [] });
         }

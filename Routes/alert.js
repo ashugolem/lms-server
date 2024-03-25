@@ -5,7 +5,7 @@ const getAlert = require('../controller/alert/getAlert')
 const createAlert = require('../controller/alert/createAlert')
 const updateAlert = require('../controller/alert/updateAlert')
 
-router.get('/', getAlert);
+router.get('/:end', getAlert);
 router.post('/', createAlert);
 router.put('/:id', updateAlert);
 
