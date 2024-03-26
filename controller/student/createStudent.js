@@ -1,10 +1,11 @@
 const Student = require('../../model/studentModel')
 
-const createStudent = async (req, res) => {
+const createStudent = async (id, auth) => {
     try {
-        const {name, admissionNo, course, branch, semester  } = req.body // Destructuring
+        const {name, admissionNo, course, branch, semester  } = auth // Destructuring
+        console.log("Name : ",auth.name)
         const student = await Student.create({
-            user: req.params.id,
+            user: id.toString(),
             name,
             admissionNo, 
             course, 
@@ -12,7 +13,7 @@ const createStudent = async (req, res) => {
             semester
         })
 
-        res.json({ success: true, student }).status(200)
+        return { success: true, student }
 
     } catch (error) {
         console.log(error.message)

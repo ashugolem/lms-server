@@ -9,7 +9,6 @@ cloudinary.config({
 const uploader = async (filePath) => {
     try {
         let result = await cloudinary.uploader.upload(filePath);  
-        console.log("Cloudinary URI : ", result)
         return result       
     } catch (error) {
         console.log(error.message)

@@ -15,14 +15,17 @@ const getUserDetails = require('../controller/user/getUserDetails')         // T
 const login = require('../controller/user/login')                           // To check if user exists or not
 const {uploadAvatar, upload} = require('../controller/user/uploadAvatar')
 // const upload = require('../controller/user/uploadAvatar')
-
-
+const changePassword = require('../controller/user/changePassword')
 
 
 // Middleware : Body Validation 
-const { validation_array, handleValidationErrors } = require('../middleware/Validation/User/userValidation')
+const { validation_array, handleValidationErrors } = require('../middleware/Validation/User/userValidation');
+const adminValidation = require('../middleware/adminValidation');
+const userValidation = require('../middleware/userValidation');
+const checkPassword = require('../controller/user/checkPassword');
 
 router.post('/', validation_array, handleValidationErrors, createUser)
+router.post('/admin-create-user', adminValidation ,  createUser)
 router.post('/get-user', getUser)
 router.post('/login', login)
 router.get('/get-user/:role', getByRole)
@@ -30,6 +33,8 @@ router.put('/:id',  updateUser)
 router.get('/:id', getUserDetails)
 router.get('/', getAllUser)
 router.post('/upload-avatar/:id',upload.single('avatar'), uploadAvatar)
+router.put('/change-password/:id', userValidation, changePassword)
+router.post('/check-password/:id', userValidation, checkPassword)
 
 
 

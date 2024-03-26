@@ -10,7 +10,8 @@ const getStudent = async (req, res) => {
             const user = await User.findById(req.params.id)
             res.status(200).json({student: { 
                 ...student.toObject(), 
-                profile: user.profile? user.profile : null
+                profile: user.profile? user.profile : null,
+                email: user.email ? user.email : null,
             }})
         }
     } catch (error) {
