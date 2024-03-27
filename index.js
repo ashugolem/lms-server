@@ -42,7 +42,7 @@ app.use('/activation-request',require('./Routes/activation'))
 //   | minute
 // second(optional)
 
-cron.schedule('0 0 * * 1-5', () => {
+cron.schedule('0 0 * * *', () => {
     addFineToStudentAccount();
 });
 

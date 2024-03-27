@@ -24,12 +24,11 @@ const addFineToStudentAccount = async (req, res) => {
                     })
                     await Students.updateOne({ _id : student._id }, { $set: { fine: (student.fine + latestFine.finePerDay) } })
                 }
-
             }
         })
-        res.status(200).json({ success: true })
+        console.log({ success: true })
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message })
+        console.log({ success: false, error: error.message })
     }
 }
 
