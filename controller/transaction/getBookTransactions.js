@@ -3,7 +3,12 @@ const TransactionRecord = require('../../model/Book-Transaction/transactionRecor
 const getTransaction = async (req, res) => {
     try {
         const transactions = await TransactionRecord.find();
-        res.status(200).json({ transactions })
+        if (!transactions || transactions.length === 0){
+            res.status(200).json({success: false, message: 'No transaction records found'})
+        }
+        else{
+            res.status(200).json({ success: true, transactions })
+        }
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
