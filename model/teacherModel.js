@@ -13,10 +13,6 @@ const TeacherSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dob: {
-        type: Date,
-        required: true,
-    },
     registeredAT: {
         type: Date,
         default: Date.now()

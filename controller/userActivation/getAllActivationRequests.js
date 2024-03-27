@@ -6,7 +6,7 @@ const moment = require('moment')
 const getAllActivationRequest = async (req, res) => {
     try {
         const ActivationRequests = await ActivationModel.find();
-        if (!ActivationRequests) {
+        if (ActivationRequests.length === 0) {
             return res.status(200).json({ success: false, msg: 'No Creations found' });
         }
         if (ActivationRequests.length > 0) {
@@ -46,7 +46,8 @@ const getAllActivationRequest = async (req, res) => {
                     }
                 }));
 
-            res.status(200).json(ActivationRequestsDetails.sort((a, b) => {
+            const unseenRequestCount = ActivationRequestsDetails.filter(request => !request.seen).length;
+            const requests = ActivationRequestsDetails.sort((a, b) => {
                 if (a.seen === b.seen) {
                     // If both alerts have the same 'seen' value, sorted based on the 'time' property
                     return moment(b.time).diff(a.time);
@@ -57,7 +58,8 @@ const getAllActivationRequest = async (req, res) => {
                     // If 'seen' is true, move the alert down in the sorted order
                     return 1;
                 }
-            }).slice(0, req.params.end));
+            }).slice(0, req.params.end)
+            res.status(200).json({success: true, requests , unseenRequestCount});
         }
     } catch (error) {
         res.status(500).json({ success: false, msg: `Error in getting all creations with error message: ${error.message}` });
