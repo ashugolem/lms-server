@@ -11,5 +11,10 @@
             "src": "/(.*)",
             "dest": "index.js"
         }
-    ]
+    ],
+    "crons": [{
+        "path": "/calculate-fine/fine-cron",
+        "schedule": "30 10 * * *"
+    }]
+
 }

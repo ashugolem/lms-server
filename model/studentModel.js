@@ -29,11 +29,8 @@ const StudentSchema = new mongoose.Schema({
         required: true,
     },
     semester: {
-        type: Number,
+        type: String,
         required: true,
-    },
-    address: {
-        type: Number,
     },
     booksLent: {
         type: Number,
