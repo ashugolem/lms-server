@@ -15,7 +15,7 @@
     "crons": [
         {
             "path": "/calculate-fine/fine-cron",
-            "schedule": "0 18 * * *"
+            "schedule": "30 18 * * *"
         }
     ]
 }
