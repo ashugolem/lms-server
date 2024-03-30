@@ -12,9 +12,10 @@
             "dest": "index.js"
         }
     ],
-    "crons": [{
-        "path": "/calculate-fine/fine-cron",
-        "schedule": "30 5 * * *"
-    }]
-
+    "crons": [
+        {
+            "path": "/calculate-fine/fine-cron",
+            "schedule": "0 5 * * *"
+        }
+    ]
 }
