@@ -42,9 +42,10 @@ app.use('/activation-request',require('./Routes/activation'))
 //   | minute
 // second(optional)
 
-cron.schedule('0 0 * * *', () => {
-    addFineToStudentAccount();
-});
+// Cron job for fine calculation manual testing
+// cron.schedule("* * * * * *", async function () {
+    // addFineToStudentAccount()
+// });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
