@@ -10,6 +10,7 @@ const createUser = require('../controller/user/createUser')                 // F
 const getByRole = require('../controller/user/getByRole')                   // To get list filtered by role
 const updateUser = require('../controller/user/updateUser')                 // To Update user information
 const getUser = require('../controller/user/getUser')                       // To check if user exists or not
+const verifyAuth = require('../controller/user/verifyAuth')                       // To check if Role is correct or not
 const getAllUser = require('../controller/user/getAllUser')                 // To check if user exists or not
 const getUserDetails = require('../controller/user/getUserDetails')         // To get the arrary of all of the users
 const login = require('../controller/user/login')                           // To check if user exists or not
@@ -35,6 +36,7 @@ router.get('/', getAllUser)
 router.post('/upload-avatar/:id',upload.single('avatar'), uploadAvatar)
 router.put('/change-password/:id', userValidation, changePassword)
 router.post('/check-password/:id', userValidation, checkPassword)
+router.get('/verify/:role', verifyAuth)
 
 
 
